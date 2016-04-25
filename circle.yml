@@ -1,0 +1,17 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - docker info
+    - make build
+
+test:
+  override:
+    - make test
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - make push
