@@ -15,8 +15,15 @@ tag:
 	@docker tag $$(cat .last_build) $(account)/$(project):$$(cat .last_build) 
 
 push: tag
+	@echo "Pushing to $(account)/$(project):$$(cat .last_build)"
 	@docker push $(account)/$(project):$$(cat .last_build)
 
 push_latest:
+	@echo "Pushing to $(account)/$(project)"
 	@docker tag $$(cat .last_build) $(account)/$(project)
 	@docker push $(account)/$(project)
+
+push_release_tag:
+	@echo "Pushing to $(account)/$(project):$(release_tag)"
+	@docker tag $$(cat .last_build) $(account)/$(project):$(CIRCLE_TAG)
+	@docker push $(account)/$(project):$(CIRCLE_TAG)
