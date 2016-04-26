@@ -3,3 +3,7 @@
 # docker-base
 
 base alpine linux image
+
+# Building
+
+Merges to master are automatically built and pushed to dockerhub under vungle/docker-base:latest
