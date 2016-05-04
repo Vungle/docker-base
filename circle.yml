@@ -4,6 +4,7 @@ machine:
 dependencies:
   override:
     - docker info
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - make build
 
 test:
@@ -11,8 +12,12 @@ test:
     - make test
 
 deployment:
-  hub:
+  latest:
     branch: master
     commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - make push_latest
+
+  release:
+    tag: /.*/
+    commands:
+      - make push_release_tag
